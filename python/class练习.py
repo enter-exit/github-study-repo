@@ -57,34 +57,56 @@
 # obj2 = B.__call__()
 # print(obj,obj2)
 # print(obj is obj2)
-from typing import Any
-
-
-print('*'*100)
-
+# 2024年11月20日
 class A(type):
     obj = None
-    def __new__(cls,*args, **kwargs):
+    def __new__(cls, *args, **kwargs):
         print('A-new')
-        return super().__new__(cls,*args, **kwargs)
-    def __init__(self,*args, **kwargs) -> None:
+        return super().__new__(cls,*args,**kwargs)
+    def __init__(self,*args,**kwargs):
         print('A-init')
-        # print(args,kwargs)
-    def __call__(self, *args: Any, **kwds: Any) -> Any:
+
+    def __call__(self, *args, **kwargs):
         if not self.obj:
             self.obj = self.__new__(self)
         self.__init__(self.obj)
         return self.obj
+
+
 # B = A('B',(),{})
 # B = A.__call__(A,'B',(),{})
 class B(metaclass=A):
-   def __new__(cls):
-       print('B-new')
-       return super().__new__(cls)
-   def __init__(self, *args, **kwargs) -> None:
-       print('B-init')
-       
+    def __new__(cls, *args, **kwargs):
+        print('B-new')
+        return super().__new__(cls)
+    def __init__(self):
+        print('B-init')
+
 obj = B()
 obj2 = B.__call__()
 print(obj,obj2)
 print(obj is obj2)
+# 2024年11月20日15:52:29
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
